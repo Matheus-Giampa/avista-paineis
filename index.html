@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Avista — Painéis publicitários para alugar</title>
+<meta name="description" content="Encontre, reserve e pague painéis publicitários direto com os proprietários. Outdoor, front-light, empena e LED, com calendário de disponibilidade em tempo real.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="styles.css?v=5">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top__in">
+    <a href="#" class="logo" aria-label="Avista, início">
+      <svg viewBox="0 0 34 26" aria-hidden="true"><rect x="1" y="1" width="32" height="15" fill="currentColor"/><rect x="6" y="16" width="3" height="9" fill="currentColor"/><rect x="25" y="16" width="3" height="9" fill="currentColor"/><rect x="5" y="5" width="12" height="3" fill="var(--cone)"/></svg>
+      <span>avista</span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#explorar">Buscar painéis</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#proprietarios">Para proprietários</a>
+      <a href="#taxas">Taxas</a>
+      <a href="#suporte">Suporte</a>
+    </nav>
+    <div class="top__cta">
+      <button class="btn btn--ghost" data-open="login">Entrar</button>
+      <a href="#proprietarios" class="btn btn--ink">Cadastrar meu painel</a>
+      <button class="burger" id="burger" aria-label="Abrir menu"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div>
+      <p class="kicker"><span class="dot"></span> 146 painéis disponíveis em São Paulo e região</p>
+      <h1>Seu anúncio<br>na rua <em>certa</em>,<br>sem intermediário.</h1>
+    </div>
+    <div class="hero__side">
+      <p>Veja no mapa onde cada painel está, quanta gente passa por ali e quais semanas estão livres. Mande a solicitação, o dono aprova e você paga por aqui mesmo.</p>
+      <form class="search" id="heroSearch">
+        <label class="search__f">
+          <span>Onde</span>
+          <input id="qWhere" type="text" placeholder="Bairro, avenida ou cidade" autocomplete="off">
+        </label>
+        <label class="search__f">
+          <span>Formato</span>
+          <select id="qType">
+            <option value="">Todos</option>
+            <option>Outdoor</option>
+            <option>Front-light</option>
+            <option>Painel LED</option>
+            <option>Empena</option>
+            <option>Triedro</option>
+          </select>
+        </label>
+        <button class="btn btn--cone" type="submit">Buscar</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- EXPLORAR -->
+<section class="explore" id="explorar">
+  <div class="explore__bar wrap">
+    <div class="chips" id="chips">
+      <button class="chip is-on" data-f="all">Todos</button>
+      <button class="chip" data-f="lit">Iluminados</button>
+      <button class="chip" data-f="now">Livres este mês</button>
+      <button class="chip" data-f="cheap">Até R$ 2.500</button>
+    </div>
+    <p class="explore__count"><b id="count">0</b> painéis nesta área</p>
+  </div>
+  <div class="explore__body">
+    <aside class="list" id="list"></aside>
+    <div class="map" id="map"></div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="how" id="como-funciona">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">01</span>
+      <h2>Como funciona</h2>
+      <div class="switch" role="tablist">
+        <button class="is-on" data-how="anunciante" role="tab">Quero anunciar</button>
+        <button data-how="proprietario" role="tab">Tenho um painel</button>
+      </div>
+    </div>
+
+    <ol class="steps" data-panel="anunciante">
+      <li><span class="n">1</span><h3>Escolha pelo mapa</h3><p>Filtre por bairro, formato e preço. Cada painel mostra fotos reais, medidas, fluxo estimado e o calendário das próximas semanas.</p></li>
+      <li><span class="n">2</span><h3>Solicite o período</h3><p>Selecione as bissemanas livres e envie sua arte. Datas já reservadas ficam travadas — não tem como pedir em cima de outro anúncio.</p></li>
+      <li><span class="n">3</span><h3>O proprietário aprova</h3><p>Ele confere a arte e responde em até 48h. Se precisar ajustar algo, a conversa fica registrada na própria solicitação.</p></li>
+      <li><span class="n">4</span><h3>Pague e acompanhe</h3><p>Pix ou cartão, direto pela plataforma. Você recebe a foto da instalação e o histórico fica salvo na sua conta.</p></li>
+    </ol>
+    <ol class="steps" data-panel="proprietario" hidden>
+      <li><span class="n">1</span><h3>Cadastre o painel</h3><p>Endereço, fotos, medidas, iluminação e preço por período. Nossa equipe revisa antes de publicar.</p></li>
+      <li><span class="n">2</span><h3>Receba pedidos</h3><p>Avisamos por e-mail a cada nova solicitação, com a arte e as datas. Você aprova, recusa ou propõe outro período.</p></li>
+      <li><span class="n">3</span><h3>Agenda se atualiza sozinha</h3><p>Pagou, bloqueou. O período sai da disponibilidade na hora, sem planilha paralela e sem reserva em dobro.</p></li>
+      <li><span class="n">4</span><h3>Receba o repasse</h3><p>O valor fica retido até a veiculação começar e é repassado para sua conta, já descontada a taxa da plataforma.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- PROPRIETARIOS / DASHBOARD -->
+<section class="owners" id="proprietarios">
+  <div class="wrap owners__grid">
+    <div class="owners__copy">
+      <span class="tag tag--light">02</span>
+      <h2>Para quem tem painel: menos WhatsApp, mais painel ocupado.</h2>
+      <p>Hoje a maioria das locações acontece por telefone, planilha e comprovante no grupo. Aqui fica tudo num lugar só: pedidos, agenda, pagamentos e histórico de cada face.</p>
+      <ul class="ticks">
+        <li>Calendário por painel com bloqueio automático</li>
+        <li>Aprovar, recusar ou contra-propor em um clique</li>
+        <li>Recebimento rastreado, sem cobrar cliente</li>
+        <li>Relatório de ocupação e faturamento mensal</li>
+      </ul>
+      <button class="btn btn--cone" data-open="cadastro">Cadastrar meu primeiro painel</button>
+    </div>
+
+    <div class="dash" aria-label="Exemplo do painel do proprietário">
+      <div class="dash__top">
+        <span class="dash__dots"><i></i><i></i><i></i></span>
+        <span class="mono">avista.com.br/minha-conta</span>
+      </div>
+      <div class="dash__body">
+        <div class="dash__side">
+          <b>Outdoor Leste</b>
+          <a class="is-on">Solicitações <span class="badge" id="pendCount">3</span></a>
+          <a>Meus painéis</a>
+          <a>Agenda</a>
+          <a>Recebimentos</a>
+          <a>Dados da conta</a>
+        </div>
+        <div class="dash__main">
+          <div class="kpis">
+            <div><small>Ocupação out.</small><b>78%</b></div>
+            <div><small>A receber</small><b>R$ 14.320</b></div>
+            <div><small>Painéis ativos</small><b>9</b></div>
+          </div>
+          <h4>Solicitações recebidas</h4>
+          <div class="reqs" id="reqs"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TAXAS -->
+<section class="fees" id="taxas">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">03</span>
+      <h2>Taxas, sem letra miúda</h2>
+    </div>
+    <div class="fees__grid">
+      <article class="fee">
+        <h3>Anunciante</h3>
+        <p class="fee__big">R$ 0</p>
+        <p>para criar conta, buscar e solicitar. Você vê o valor final antes de pagar — o preço do painel mais a taxa de serviço, nada além.</p>
+      </article>
+      <article class="fee fee--hl">
+        <h3>Proprietário</h3>
+        <p class="fee__big">10%<small> por locação</small></p>
+        <p>só quando o painel é alugado. Cadastro, anúncio e ferramentas de agenda não custam nada. Se não alugar, não paga.</p>
+      </article>
+      <article class="fee">
+        <h3>Empresas com várias praças</h3>
+        <p class="fee__big">Sob consulta</p>
+        <p>Campanhas com 10 painéis ou mais, faturamento único e nota fiscal consolidada. Fale com o comercial.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="wrap faq__grid">
+    <div>
+      <span class="tag">04</span>
+      <h2>Perguntas que sempre aparecem</h2>
+    </div>
+    <div class="faq__list">
+      <details open><summary>Quando o anunciante paga?</summary><p>Depois que o proprietário aprova a solicitação. Antes disso nada é cobrado, e se ele recusar a solicitação simplesmente é encerrada.</p></details>
+      <details><summary>O preço pode ser negociado?</summary><p>Cada painel tem um preço de tabela. Na solicitação você pode propor outro valor, e o proprietário aceita, recusa ou faz uma contraproposta.</p></details>
+      <details><summary>Posso anunciar e ter painéis na mesma conta?</summary><p>Pode. A conta é uma só; você alterna entre “Anunciando” e “Meus painéis” no menu.</p></details>
+      <details><summary>Quem garante que o painel existe?</summary><p>Todo painel passa por revisão antes de ser publicado: conferimos endereço, fotos e documentação do proprietário. Após a instalação, o proprietário envia foto do anúncio no local.</p></details>
+      <details><summary>E a produção e instalação da lona?</summary><p>Depende do painel. Alguns proprietários incluem impressão e colagem; outros cobram à parte. Isso aparece na página de cada painel, antes da solicitação.</p></details>
+      <details><summary>Vocês emitem recibo e nota?</summary><p>Todo pagamento gera recibo na plataforma. A nota fiscal do serviço de veiculação é emitida pelo proprietário; a da taxa de serviço, por nós.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- SUPORTE -->
+<section class="support" id="suporte">
+  <div class="wrap support__grid">
+    <div>
+      <h2>Fala com a gente.</h2>
+      <p>Dúvida sobre uma reserva, problema com pagamento ou quer montar uma campanha maior? Respondemos em horário comercial, normalmente no mesmo dia.</p>
+      <dl class="contacts">
+        <div><dt>Suporte</dt><dd>suporte@avista.com.br</dd></div>
+        <div><dt>Comercial</dt><dd>(11) 4000-0000</dd></div>
+        <div><dt>Horário</dt><dd>Seg a sex, 9h às 18h</dd></div>
+      </dl>
+    </div>
+    <form class="contact" id="contactForm">
+      <div class="seg">
+        <label><input type="radio" name="motivo" checked> Suporte</label>
+        <label><input type="radio" name="motivo"> Comercial</label>
+        <label><input type="radio" name="motivo"> Outro</label>
+      </div>
+      <label>Nome<input required type="text"></label>
+      <label>E-mail<input required type="email"></label>
+      <label>Mensagem<textarea required rows="4"></textarea></label>
+      <button class="btn btn--ink" type="submit">Enviar mensagem</button>
+      <p class="contact__ok" hidden>Recebemos sua mensagem. Resposta no seu e-mail em breve.</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__grid">
+    <div>
+      <a href="#" class="logo logo--light"><svg viewBox="0 0 34 26" aria-hidden="true"><rect x="1" y="1" width="32" height="15" fill="currentColor"/><rect x="6" y="16" width="3" height="9" fill="currentColor"/><rect x="25" y="16" width="3" height="9" fill="currentColor"/><rect x="5" y="5" width="12" height="3" fill="var(--cone)"/></svg><span>avista</span></a>
+      <p>Marketplace de mídia exterior.<br>São Paulo, SP.</p>
+    </div>
+    <div><h5>Anunciar</h5><a href="#explorar">Buscar painéis</a><a href="#como-funciona">Como funciona</a><a href="#taxas">Taxas</a></div>
+    <div><h5>Proprietários</h5><a href="#proprietarios">Cadastrar painel</a><a href="#proprietarios">Painel de controle</a><a href="#taxas">Repasses</a></div>
+    <div><h5>Avista</h5><a href="#suporte">Suporte</a><a href="#">Termos de uso</a><a href="#">Privacidade</a></div>
+  </div>
+  <div class="wrap foot__bottom"><span>© 2026 Avista Mídia Exterior Ltda.</span><span class="mono">CNPJ 00.000.000/0001-00</span></div>
+</footer>
+
+<!-- DRAWER: detalhe do painel -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <button class="x" data-close aria-label="Fechar">×</button>
+  <div id="drawerBody"></div>
+</aside>
+
+<!-- MODAL genérico -->
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modal__box">
+    <button class="x" data-close aria-label="Fechar">×</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="data.js?v=5"></script>
+<script src="app.js?v=5"></script>
+</body>
+</html>
